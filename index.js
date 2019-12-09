@@ -53,11 +53,6 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-// app.get('/', function(req, res) {
-//     // response.sendFile(path.join(__dirname + '/login.html'));
-//     res.render('pages/index');
-// });
-
 // index page 
 app.get('/', function(req, res) {
     res.render('pages/index');
@@ -81,7 +76,7 @@ app.post('/auth', function(request, response) {
 			if (results.length > 0) {
 				request.session.loggedin = true;
 				request.session.username = username;
-				response.redirect('/home');
+				response.redirect('/admin');
 			} else {
 				response.send('Incorrect Username and/or Password!');
 			}			
@@ -93,20 +88,13 @@ app.post('/auth', function(request, response) {
 	}
 });
 
-// admin page 
-// app.get('/admin', function(req, res) {
-//     res.render('pages/admin');
-// });
-
-app.get('/home', function(request, response) {
+app.get('/admin', function(request, response) {
 
 	if (request.session.loggedin) {
-		// response.send('Welcome back, ' + request.session.username + '!');
 		var userName = request.session.username;
 		response.render('pages/admin', {
 			userName: userName
 		});
-
 	} else {
 		response.render('pages/login');
 		// response.send('Please login to view this page!');
