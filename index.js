@@ -12,11 +12,13 @@ var connection = mysql.createConnection({
 });
 
 var app = express();
+
 app.use(session({
 	secret: 'secret',
 	resave: true,
 	saveUninitialized: true
 }));
+
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
@@ -64,3 +66,6 @@ app.get('/logout',(req,res) => {
 });
 
 app.listen(3000);
+
+// Tutorials: https://codeforgeek.com/manage-session-using-node-js-express-4/
+// https://codeshack.io/basic-login-system-nodejs-express-mysql/
